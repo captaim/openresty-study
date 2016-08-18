@@ -1,0 +1,1 @@
+print(string.len("hello lua")) -->output  9
