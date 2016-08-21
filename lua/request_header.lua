@@ -1,28 +1,11 @@
-local function print_table(t)
-	local function parse_array(key,tab)
-		local str = ''
+ngx.req.set_header('Foo','Bar')
 
-		for _,v in pairs(tab) do
-			str = str .. key .. ' ' .. v .. '\r\n'
-		end
-		return str
-	end
+local res = ngx.location.capture('/sub_request_header')
 
-	local str = ''
-	for k,v in pairs(t) do
-		if type(v) == "table" then
-			str = str .. parse_array(k,v)
-		else
-			str = str .. k .. ' ' .. (v) .. '\r\n'
-		end
-	end
-	return str
+if res.status == ngx.HTTP_OK then
+	ngx.say(res.body)
+else
+	ngx.exit(res.status)
 end
 
---http请求头不区分大小写
---local headers = ngx.req.get_headers()
 
---http请求头区分大小写
-local headers = ngx.req.get_headers(0，true)
-
-ngx.say(print_table(headers))
