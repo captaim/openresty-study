@@ -61,6 +61,25 @@ local str_json = json.encode(t)
 ngx.say(str_json)
 
 
+--错误json串的处理
+
+local str_error_json = [["key":"this is key","value":"this is value"}]]
+
+local function json_decode(str)
+	local json_value = nil
+	pcall( function(str) json_value = json.decode(str) end, str)
+	return json_value
+end
+
+local t = json_decode(str_error_json)
+
+ngx.say(t)
+
+
+
+
+
+
 
 
 
