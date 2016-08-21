@@ -1,4 +1,4 @@
-ngx.req.set_header('Foo','Bar')
+ngx.req.set_header('Foo','Bar1')
 
 local res = ngx.location.capture('/sub_request_header')
 
