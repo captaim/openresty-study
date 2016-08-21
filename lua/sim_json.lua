@@ -23,3 +23,12 @@ local t = {key='table key',value='table value',num=1}
 local str_json = json.encode(t)
 
 ngx.say(str_json)
+
+
+-- 将lua talbe转换为json的数组
+
+local t = {key={'list1','list2','list..'},num=1}
+
+local str_json = json.encode(t)
+
+ngx.say(str_json)
