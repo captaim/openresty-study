@@ -52,6 +52,21 @@ ngx.say(str_json)
 
 
 --
+local t = {1,2}
+
+t[3] = 99	--此处t[1000]为会报错，lua对内存做了保护，可以通过 json.encode_sparse_array(true) 来解决
+
+local str_json = json.encode(t)
+
+ngx.say(str_json)
+
+
+
+
+
+
+
+
 
 
 
