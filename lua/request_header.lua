@@ -19,6 +19,10 @@ local function print_table(t)
 	return str
 end
 
-local headers = ngx.req.get_headers()
+--http请求头不区分大小写
+--local headers = ngx.req.get_headers()
+
+--http请求头区分大小写
+local headers = ngx.req.get_headers(0，true)
 
 ngx.say(print_table(headers))
