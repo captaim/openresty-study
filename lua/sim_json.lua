@@ -32,3 +32,13 @@ local t = {key={'list1','list2','list..'},num=1}
 local str_json = json.encode(t)
 
 ngx.say(str_json)
+
+
+--json将lua的空talbe默认转换成json的空对象
+local t = {}
+
+local str_json = json.encode(t)
+
+ngx.say(str_json)
+
+
