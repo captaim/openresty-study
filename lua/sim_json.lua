@@ -41,4 +41,17 @@ local str_json = json.encode(t)
 
 ngx.say(str_json)
 
+--将空的lua talbe转换为一个空的数组
+local t = {}
+
+json.encode_empty_table_as_object(false)	--如果此选项为真的话，则将此转换为一个空的对象
+
+local str_json = json.encode(t)
+
+ngx.say(str_json)
+
+
+--
+
+
 
