@@ -1,5 +1,12 @@
-ngx.req.read_body()
+local function print_array(tab)
+	local str = ''
 
-local data = ngx.req.get_body_data()
+	for _,v in pairs(tab) do
+		str = str .. ' ' .. tostring(v) .. '\r\n'
+	end
+	return str
+end
 
-ngx.say(data)
+local args = ngx.req.get_uri_args()
+
+ngx.print(print_array(args))
