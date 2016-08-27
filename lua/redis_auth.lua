@@ -7,11 +7,19 @@ if not ok then
 	return 
 end
 
--- ok ,err = red.auth("")
--- if not ok then
--- 	ngx.say("failed to red:auth", err)
--- 	return
--- end
+local count
+count, err = red:get_reused_times()		--获取链路的被调用的次数
+ngx.say(count);
+if 0 == count then
+	-- ok, err = red:auth("password")
+	-- if not ok then
+	-- 	ngx.say("failed to auth:", err)
+	-- 	return
+	-- end
+elseif err then
+	ngx.say("failed to get reused times:", err)
+end
+
 
 ok, err = red:set("dog","an animal")
 if not ok then
