@@ -33,4 +33,4 @@ end
 
 ngx.say("god:", res)
 
-red:close()
+local ok, err = red:set_keepalive(10000,100)	--连接池大小为100，释放连接的时间是10000毫秒
