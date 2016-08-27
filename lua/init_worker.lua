@@ -13,8 +13,10 @@ handler = function (premature)
 	end
 end
 
-local ok, err = ngx.timer.at(delay, handler)
-if not ok then
-	ngx.log(ngx.ERR, "failed to create the timer:", err)
-	return
+if 0 == ngx.worker.id() then
+	local ok, err = ngx.timer.at(delay, handler)
+	if not ok then
+		ngx.log(ngx.ERR, "failed to create the timer:", err)
+		return
+	end
 end
