@@ -20,25 +20,28 @@ elseif err then
 	ngx.say("failed to get reused times:", err)
 end
 
-
-ok, err = red:set("dog","an animal")
-if not ok then
-	ngx.say("failed to set dog:", err)
-	return
-end
-ngx.say("set result:", ok)
-
-local res, err = red:get("dog")
-if not res then
-	ngx.say("failed to get dog:", err)
+red:init_pipeline()
+red:set("cat","Marry")
+red:set("horse","Bob")
+red:get("cat")
+red:get("horse")
+local results, err = red:commit_pipeline()
+if not results then
+	ngx.say("failed to commit the pipeline requests:", err)
 	return
 end
 
-if res == ngx.null then
-	ngx.say("dog not found")
-	return
+for i, res in pairs(results) do 
+	if type(res) == "table" then
+		if res[1] == false then
+			ngx.say("failed to run command ", i, ":",res[2])
+		else
+			--process the table value
+		end
+	else
+		-- process the scalar value
+	end
 end
 
-ngx.say("god:", res)
 
 local ok, err = red:set_keepalive(10000,100)	--连接池大小为100，释放连接的时间是10000毫秒
