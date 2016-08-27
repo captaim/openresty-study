@@ -65,6 +65,21 @@ function _M.set(self, key, value)
 	return res, err
 end
 
+function _M.cmd(self, command, ...)
+	local red, err = _connect(self)
+	if err then
+		return nil, err
+	end
+
+	local cmd_fun = red[command]
+	local res, err = cmd_fun(red, ...)
+	if nil == err then
+		_set_keepalive(self, red)
+	end
+	return res, err
+end
+
+
 return _M
 
 
